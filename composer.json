@@ -1,5 +1,5 @@
 {
-    "name": "yugo/quran",
+    "name": "yugo/laravel-quran",
     "description": "Quran Manager for Laravel",
     "type": "library",
     "license": "MIT",
