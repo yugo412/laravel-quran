@@ -9,7 +9,7 @@ The package uses Laravel's manager pattern, allowing the Quran data provider to 
 Install the package with Composer:
 
 ```bash
-composer require yugo/quran
+composer require yugo/laravel-quran
 ```
 
 Publish the configuration file when you need to customize the defaults:
