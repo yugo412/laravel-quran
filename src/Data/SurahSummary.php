@@ -9,5 +9,6 @@ final readonly class SurahSummary
         public string $name,
         public string $latinName,
         public int $verseCount,
+        public ?string $meaning = null,
     ) {}
 }

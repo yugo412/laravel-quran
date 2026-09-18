@@ -98,6 +98,7 @@ it('loads a cached list of surah summaries', function (): void {
                 'nama' => 'الفاتحة',
                 'namaLatin' => 'Al-Fatihah',
                 'jumlahAyat' => 7,
+                'arti' => 'Pembukaan',
             ]],
         ]),
     ]);
@@ -105,7 +106,8 @@ it('loads a cached list of surah summaries', function (): void {
     $surahs = Quran::surahs();
 
     expect($surahs)->toHaveCount(1)
-        ->and($surahs[0]->latinName)->toBe('Al-Fatihah');
+        ->and($surahs[0]->latinName)->toBe('Al-Fatihah')
+        ->and($surahs[0]->meaning)->toBe('Pembukaan');
 });
 
 it('loads a surah and its catalog from UmmahAPI', function (): void {
@@ -140,6 +142,7 @@ it('loads a surah and its catalog from UmmahAPI', function (): void {
                     'number' => 1,
                     'name_arabic' => 'الفاتحة',
                     'name_english' => 'Al-Fatihah',
+                    'name_translation' => 'The Opener',
                     'verses_count' => 7,
                 ]],
             ],
@@ -155,6 +158,7 @@ it('loads a surah and its catalog from UmmahAPI', function (): void {
             'id' => 'Dengan nama Allah',
         ])
         ->and($surahs[0]->name)->toBe('الفاتحة')
+        ->and($surahs[0]->meaning)->toBe('The Opener')
         ->and(Quran::attribution())->toBe([
             'label' => 'UmmahAPI',
             'url' => 'https://ummahapi.com',

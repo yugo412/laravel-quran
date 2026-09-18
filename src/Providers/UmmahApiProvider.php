@@ -81,7 +81,8 @@ final class UmmahApiProvider implements QuranCatalog, QuranProvider
          *     number: int,
          *     name_arabic: string,
          *     name_english: string,
-         *     verses_count: int
+         *     verses_count: int,
+         *     name_translation?: string
          * }> $response
          */
         $response = $this->request('/api/quran/surahs')->json('data.surahs');
@@ -92,6 +93,7 @@ final class UmmahApiProvider implements QuranCatalog, QuranProvider
                 name: (string) $surah['name_arabic'],
                 latinName: (string) $surah['name_english'],
                 verseCount: (int) $surah['verses_count'],
+                meaning: isset($surah['name_translation']) ? (string) $surah['name_translation'] : null,
             ),
             $response,
         );

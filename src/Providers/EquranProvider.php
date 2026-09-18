@@ -77,6 +77,7 @@ final class EquranProvider implements QuranCatalog, QuranProvider
                 name: (string) $surah['nama'],
                 latinName: (string) $surah['namaLatin'],
                 verseCount: (int) $surah['jumlahAyat'],
+                meaning: isset($surah['arti']) ? (string) $surah['arti'] : null,
             ),
             $response,
         );
