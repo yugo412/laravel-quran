@@ -5,6 +5,7 @@ namespace Yugo\Quran\Providers;
 use Illuminate\Http\Client\Factory as HttpFactory;
 use Yugo\Quran\Contracts\QuranCatalog;
 use Yugo\Quran\Contracts\QuranProvider;
+use Yugo\Quran\Data\Audio;
 use Yugo\Quran\Data\Surah;
 use Yugo\Quran\Data\SurahSummary;
 use Yugo\Quran\Data\Verse;
@@ -46,6 +47,10 @@ final class EquranProvider implements QuranCatalog, QuranProvider
                 $response['ayat'],
             ),
             revelationPlace: $response['tempatTurun'] ?? null,
+            audio: array_values(array_map(
+                fn (string $path): Audio => new Audio(path: $path),
+                $response['audioFull'] ?? [],
+            )),
         );
     }
 

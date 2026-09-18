@@ -6,6 +6,7 @@ use Illuminate\Http\Client\Factory as HttpFactory;
 use Illuminate\Http\Client\Response;
 use Yugo\Quran\Contracts\QuranCatalog;
 use Yugo\Quran\Contracts\QuranProvider;
+use Yugo\Quran\Data\Audio;
 use Yugo\Quran\Data\Surah;
 use Yugo\Quran\Data\SurahSummary;
 use Yugo\Quran\Data\Verse;
@@ -29,6 +30,12 @@ final class UmmahApiProvider implements QuranCatalog, QuranProvider
          *         revelation_place: string,
          *         verses_count: int
          *     },
+         *     audio?: list<array{
+         *         reciter_id?: int,
+         *         reciter?: string,
+         *         style?: string,
+         *         surah_audio: string
+         *     }>,
          *     verses: list<array{
          *         ayah: int,
          *         arabic: string,
@@ -58,6 +65,14 @@ final class UmmahApiProvider implements QuranCatalog, QuranProvider
                 $response['verses'],
             ),
             revelationPlace: (string) $response['surah']['revelation_place'],
+            audio: array_map(
+                fn (array $audio): Audio => new Audio(
+                    path: (string) $audio['surah_audio'],
+                    reciter: isset($audio['reciter']) ? (string) $audio['reciter'] : null,
+                    style: isset($audio['style']) ? (string) $audio['style'] : null,
+                ),
+                $response['audio'] ?? [],
+            ),
         );
     }
 

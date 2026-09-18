@@ -6,6 +6,7 @@ final readonly class Surah
 {
     /**
      * @param  list<Verse>  $verses
+     * @param  list<Audio>  $audio
      */
     public function __construct(
         public int $number,
@@ -15,6 +16,7 @@ final readonly class Surah
         public string $meaning,
         public array $verses,
         public ?string $revelationPlace = null,
+        public array $audio = [],
     ) {}
 
     public function verse(int $number): ?Verse
