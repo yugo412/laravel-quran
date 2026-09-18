@@ -42,6 +42,8 @@ $attribution = Quran::attribution();
 
 The returned `Surah` object contains the surah metadata and a list of `Verse` objects. Use `verse(int $number)` to select an individual verse without making another provider request. It returns `null` when the verse does not exist.
 
+The `Quran::surahs()` catalog returns `SurahSummary` objects with an optional `meaning` field when the configured provider supplies it.
+
 ## Providers
 
 ### UmmahAPI
