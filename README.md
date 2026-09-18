@@ -40,7 +40,7 @@ $verse = $surah->verse(10);
 $attribution = Quran::attribution();
 ```
 
-The returned `Surah` object contains the surah metadata and a list of `Verse` objects. Use `verse(int $number)` to select an individual verse without making another provider request. It returns `null` when the verse does not exist.
+The returned `Surah` object contains the surah metadata, a list of `Verse` objects, and an `audio` list containing `Audio` objects for the complete surah. Each audio object exposes a `path`, with optional `reciter` and `style` metadata. Use `verse(int $number)` to select an individual verse without making another provider request. It returns `null` when the verse does not exist.
 
 ## Providers
 

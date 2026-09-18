@@ -21,14 +21,14 @@ it('loads and normalizes a surah from the configured provider', function (): voi
                 'namaLatin' => 'Al-Fatihah',
                 'jumlahAyat' => 1,
                 'arti' => 'Pembukaan',
+                'audioFull' => [
+                    '01' => 'https://example.test/audio-full.mp3',
+                ],
                 'ayat' => [[
                     'nomorAyat' => 1,
                     'teksArab' => 'بِسْمِ اللّٰهِ',
                     'teksLatin' => 'Bismillaah',
                     'teksIndonesia' => 'Dengan nama Allah',
-                    'audio' => [
-                        '01' => 'https://example.test/audio.mp3',
-                    ],
                 ]],
             ],
         ]),
@@ -42,7 +42,10 @@ it('loads and normalizes a surah from the configured provider', function (): voi
     expect($surah->verses[0]->trans)->toBe([
         'en' => null,
         'id' => 'Dengan nama Allah',
-    ]);
+    ])
+        ->and($surah->audio[0]->path)->toBe('https://example.test/audio-full.mp3')
+        ->and($surah->audio[0]->reciter)->toBeNull()
+        ->and($surah->audio[0]->style)->toBeNull();
 });
 
 it('selects a verse from a loaded surah', function (): void {
@@ -123,6 +126,12 @@ it('loads a surah and its catalog from UmmahAPI', function (): void {
                     'revelation_place' => 'makkah',
                     'verses_count' => 1,
                 ],
+                'audio' => [[
+                    'reciter_id' => 1,
+                    'reciter' => 'Mishary Rashid Alafasy',
+                    'style' => 'Murattal',
+                    'surah_audio' => 'https://example.test/mishary.mp3',
+                ]],
                 'verses' => [[
                     'ayah' => 1,
                     'arabic' => 'بِسْمِ اللّٰهِ',
@@ -150,6 +159,9 @@ it('loads a surah and its catalog from UmmahAPI', function (): void {
     $surahs = Quran::surahs();
 
     expect($surah->meaning)->toBe('The Opener')
+        ->and($surah->audio[0]->path)->toBe('https://example.test/mishary.mp3')
+        ->and($surah->audio[0]->reciter)->toBe('Mishary Rashid Alafasy')
+        ->and($surah->audio[0]->style)->toBe('Murattal')
         ->and($surah->verses[0]->trans)->toBe([
             'en' => 'In the name of Allah',
             'id' => 'Dengan nama Allah',
